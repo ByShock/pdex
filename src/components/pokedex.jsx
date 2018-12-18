@@ -56,27 +56,27 @@ export default class Pokedex extends PureComponent {
       })
     })
   }
-  getData (url) {
+  getData = (url) => {
     const data = axios.get(url).then(res => {
       return res.data
     })
     return data
   }
-  prevPage () {
+  prevPage = () => {
     this.setState({
       indexOfPage: this.state.indexOfPage - 1
     })
     this.getPokemonsInfo()
   }
 
-  nextPage () {
+  nextPage = () => {
     this.setState({
       indexOfPage: this.state.indexOfPage + 1
     })
     this.getPokemonsInfo()
   }
 
-  certainPage (num) {
+  certainPage = (num) => {
     // changePage
     const index = num - 1
     this.setState({
