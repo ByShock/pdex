@@ -1,4 +1,4 @@
-.fullCard_container {
+.FullCard {
    overflow-y: scroll;
    top: 0;
    left: 0;
@@ -9,7 +9,7 @@
    display: flex;
    flex-direction: column;
 }
-.fullCard_header {
+.FullCard-header {
    background-color: #cccccc;
    text-align: center;
    margin: 0;
@@ -17,32 +17,32 @@
    font-size: 70px;
    border-bottom: 2px solid #000000;
 }
-.fullCard_content {
+.FullCard-content {
    display: flex;
    flex-wrap: wrap;
    justify-content: space-around;
 }
-.fullCard_imageBlock {
+.FullCard-imageBlock {
    display: flex;
    flex-wrap: wrap;
    width: 250px;
 }
-.fullCard_big_image{
+.FullCard-bigImage {
    margin: 0;
    padding: 0;
    box-sizing: border-box;
    width: 250px;
    height: 250px;
 }
-.fullCard_small_img {
+.FullCard-smallImg {
    box-sizing: border-box;
    max-height: 80px;
    width: 80px;
 }
-.fullCard_activeImage {
+.FullCard-activeImage {
    border: 3px solid black
 }
-.fullCard_close_button {
+.FullCard-closeButton {
    transition: .4s;
    display: flex;
    justify-content: center;
@@ -57,7 +57,7 @@
    right: 5%;
    top: 1%;
 }
-.fullCard_close_button:hover {
+.FullCard-closeButton:hover {
    background: #ffffff;
    border: 2px solid red;
 }
