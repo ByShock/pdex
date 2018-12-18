@@ -32,7 +32,6 @@ export default class SearchForm extends Component {
       console.log('no names')
     }
   }
-  // По клику на подсказку открывать FullCard!11
   handleClick = e => {
     const name = e.target.attributes['data-name'].value
     console.log(name)
@@ -64,7 +63,7 @@ export default class SearchForm extends Component {
   }
   render () {
     return (
-      <div className='search_container'>
+      <div className='Search'>
         <form role='search' onSubmit={e => e.preventDefault()}>
           <div>
             <fieldset>
@@ -78,14 +77,14 @@ export default class SearchForm extends Component {
               />
             </fieldset>
           </div>
-          <div className='search_hints_container'>
+          <div className='Search-hintsContainer'>
             {/* <button type="submit" className="btn btn-primary search_submit">Search</button> */}
             {this.state.hints && this.state.hints.length < 20
               ? this.state.hints.map((item, id) => {
                 return (
                   <div
                     key={id}
-                    className='search_hint'
+                    className='Search-hint'
                     data-name={item}
                     onClick={this.handleClick}
                   >

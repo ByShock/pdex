@@ -19,8 +19,7 @@ export default class Pokedex extends PureComponent {
     this.links = []
     this.names = []
   }
-
-  getPokemonsInfo = async () => {
+  async getPokemonsInfo () {
     if (!this.state.count) {
       const data = await axios
         .get('https://pokeapi.co/api/v2/pokemon/')
@@ -57,27 +56,27 @@ export default class Pokedex extends PureComponent {
       })
     })
   }
-  getData = url => {
+  getData (url) {
     const data = axios.get(url).then(res => {
       return res.data
     })
     return data
   }
-  prevPage = () => {
+  prevPage () {
     this.setState({
       indexOfPage: this.state.indexOfPage - 1
     })
     this.getPokemonsInfo()
   }
 
-  nextPage = () => {
+  nextPage () {
     this.setState({
       indexOfPage: this.state.indexOfPage + 1
     })
     this.getPokemonsInfo()
   }
 
-  certainPage = num => {
+  certainPage (num) {
     // changePage
     const index = num - 1
     this.setState({
@@ -91,7 +90,7 @@ export default class Pokedex extends PureComponent {
   }
   render () {
     return (
-      <div className='pokedex_container'>
+      <div className='Pokedex'>
         <SearchForm names={this.names} />
         <Pagination
           prevPage={this.prevPage}
@@ -102,7 +101,7 @@ export default class Pokedex extends PureComponent {
           indexOfPage={this.state.indexOfPage}
         />
         {this.state.pokemonsData && (
-          <div className='pokedex_cards_container'>
+          <div className='Pokedex-cardsContainer'>
             {this.state.pokemonsData.map((item, id) => {
               return <PreviewCard {...item} key={id} />
             })}

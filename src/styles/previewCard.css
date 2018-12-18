@@ -1,4 +1,4 @@
-.previewCard_container {
+.PreviewCard {
    box-sizing: border-box;
    display: flex;
    width: 250px;
@@ -8,13 +8,13 @@
    margin: 10px auto;
    padding: 5px;
 }
-.previewCard_name {
+.PreviewCard-pokemonName {
    text-align: center;
 }
-.previewCard_image {
+.PreviewCard-image {
    height: 100px;
    width: 100px;
 }
-.previewCard_button {
+.PreviewCard-button {
    width: 100%;
 }

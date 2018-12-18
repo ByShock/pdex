@@ -10,25 +10,25 @@ export default class PreviewCard extends Component {
       fullCardIsOpen: false
     }
   }
-  openCard = e => {
+  openCard (e) {
     this.setState({
       fullCardIsOpen: true
     })
   }
-  closeCard = e => {
+  closeCard (e) {
     this.setState({
       fullCardIsOpen: false
     })
   }
   render () {
     return (
-      <div className='previewCard_container'>
+      <div className='PreviewCard'>
         <div>
-          <div className='previewCard_name'>
+          <div className='PreviewCard-pokemonName'>
             {this.props.name[0].toUpperCase() + this.props.name.slice(1)}
           </div>
           <img
-            className='previewCard_image'
+            className='PreviewCard-image'
             src={this.props.sprites.front_default}
             alt={this.props.name}
           />
@@ -36,7 +36,7 @@ export default class PreviewCard extends Component {
             <p>ID: {this.props.id}</p>
             {/* <li className="list-group-item">Height: { this.props.height }</li> */}
           </div>
-          <button className='previewCard_button' onClick={this.openCard}>
+          <button className='PreviewCard-button' onClick={this.openCard}>
             More info...
           </button>
         </div>

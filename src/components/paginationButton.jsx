@@ -22,7 +22,7 @@ export default class PaginationButton extends Component {
         data-value={this.props.value}
         onClick={this.props.certainPage}
         className={`
-               pagination_item
+               Pagination-item
                ${this.props.numberOfPage === this.props.value ? ' active' : ''}
             `}
       >

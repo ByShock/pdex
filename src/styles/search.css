@@ -1,7 +1,7 @@
-.search_hints_container {
+.Search-hintsContainer {
    position: absolute;
 }
-.search_hint {
+.Search-hint {
    background: #cccccc;
    border: 1px solid #000;
    width: 100%;
@@ -9,6 +9,6 @@
    padding: 2px 5px;
    margin: 2px;
 }
-.search_hint:hover {
+.Search-hint:hover {
    background-color: #ffffff;
 }

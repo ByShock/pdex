@@ -49,27 +49,27 @@ export default class Pagination extends PureComponent {
     return (
       <div>
         {this.props.count && (
-          <div className='pagination_container'>
-            <ul className='pagination_items'>
+          <div className='Pagination'>
+            <ul className='Pagination-items'>
               <li
-                className={`pagination_item ${
+                className={`Pagination-item ${
                   this.props.indexOfPage <= 0 ? 'disabled' : ''
                 }`}
               >
-                <a onClick={this.props.prevPage} className='pagination_link'>
+                <a onClick={this.props.prevPage} className='Pagination-link'>
                   {'Prev Page'}
                 </a>
               </li>
               {this.state.buttons}
               <li
-                className={`pagination_item ${
+                className={`Pagination-item ${
                   this.props.count / this.props.previewCardsPerPage <=
                   this.props.indexOfPage + 1
                     ? 'disabled'
                     : ''
                 }`}
               >
-                <a onClick={this.props.nextPage} className='pagination_link'>
+                <a onClick={this.props.nextPage} className='Pagination-link'>
                   {'Next Page'}
                 </a>
               </li>

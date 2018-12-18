@@ -1,13 +1,13 @@
-.pagination_container {
+.Pagination {
    display: flex;
    justify-content: center;
 }
-.pagination_items {
+.Pagination-items {
    list-style: none;
    display: flex;
    margin: 0 auto;
 }
-.pagination_item {
+.Pagination-item {
    vertical-align: middle;
    text-align: center;
    min-width: 20px;
@@ -15,7 +15,7 @@
    margin: 2px;
    border: 1px solid #000000;
 }
-.pagination_item:hover {
+.Pagination-item:hover {
    cursor: pointer;
 }
 
@@ -29,6 +29,6 @@
 .disabled:hover{
    cursor: not-allowed;
 }
-.disabled > .pagination_link {
+.disabled > .Pagination-link {
    pointer-events: none;
 }
