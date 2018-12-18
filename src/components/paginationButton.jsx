@@ -3,9 +3,7 @@ import React, { Component } from 'react'
 
 export default class PaginationButton extends Component {
   componentDidUpdate (prevProps) {
-    if (
-      this.props.visible !== prevProps.visible
-    ) {
+    if (this.props.visible !== prevProps.visible) {
       console.log('visible')
       this.setState({
         visible: this.props.visible
@@ -25,14 +23,12 @@ export default class PaginationButton extends Component {
         onClick={this.props.certainPage}
         className={`
                pagination_item
-               ${
-      this.props.numberOfPage === this.props.value
-        ? ' active'
-        : ''
-      }
+               ${this.props.numberOfPage === this.props.value ? ' active' : ''}
             `}
       >
-        <a className='page-link' data-value={this.props.value}>{this.props.value}</a>
+        <a className='page-link' data-value={this.props.value}>
+          {this.props.value}
+        </a>
       </li>
     )
   }

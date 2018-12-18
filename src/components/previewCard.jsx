@@ -10,40 +10,39 @@ export default class PreviewCard extends Component {
       fullCardIsOpen: false
     }
   }
-  openCard = (e) => {
+  openCard = e => {
     this.setState({
       fullCardIsOpen: true
     })
   }
-  closeCard = (e) => {
+  closeCard = e => {
     this.setState({
       fullCardIsOpen: false
     })
   }
   render () {
     return (
-      <div className="previewCard_container">
+      <div className='previewCard_container'>
         <div>
-          <div className="previewCard_name">
-            { this.props.name[0].toUpperCase() + this.props.name.slice(1) }
+          <div className='previewCard_name'>
+            {this.props.name[0].toUpperCase() + this.props.name.slice(1)}
           </div>
           <img
-            className="previewCard_image"
-            src={ this.props.sprites.front_default }
-            alt={ this.props.name }/>
+            className='previewCard_image'
+            src={this.props.sprites.front_default}
+            alt={this.props.name}
+          />
           <div>
-            <p>ID: { this.props.id }</p>
-              {/*<li className="list-group-item">Height: { this.props.height }</li>*/}
+            <p>ID: {this.props.id}</p>
+            {/* <li className="list-group-item">Height: { this.props.height }</li> */}
           </div>
-          <button 
-            className="previewCard_button"
-            onClick={this.openCard}>More info...</button>
+          <button className='previewCard_button' onClick={this.openCard}>
+            More info...
+          </button>
         </div>
-        {
-          this.state.fullCardIsOpen
-          ? <FullCard {...this.props} closeCard={this.closeCard}/>
-          : null
-        }
+        {this.state.fullCardIsOpen ? (
+          <FullCard {...this.props} closeCard={this.closeCard} />
+        ) : null}
       </div>
     )
   }

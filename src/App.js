@@ -6,7 +6,7 @@ class App extends Component {
   render () {
     return (
       <BrowserRouter>
-        <Route path="/" component={Pokedex}/>
+        <Route path='/' component={Pokedex} />
       </BrowserRouter>
     )
   }
