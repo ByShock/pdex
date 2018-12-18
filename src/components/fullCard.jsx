@@ -1,30 +1,19 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 import '../styles/fullCard.css'
 
 export default function FullCard (props) {
-  let [imageUrls, setImageUrls] = useState([])
-  let [activeImage, setActiveImage] = useState(null)
-  const handleClick = e => {
-    const images = document.getElementsByClassName('FullCard-smallImg')
-    for (let i = 0; i < images.length; i++) {
-      images[i].setAttribute('class', 'FullCard-smallImg')
-    }
-    setActiveImage(e.target.attributes.src.value)
+  const sprites = props.sprites
+  let [activeImage, setActiveImage] = useState(sprites.front_default)
 
-    e.target.setAttribute('class', 'FullCard-smallImg FullCard-activeImage')
-  }
-  useEffect(() => {
-    const sprites = props.sprites
-    const imageUrls = []
-    for (const key in sprites) {
-      if (sprites[key]) {
-        const imgUrl = sprites[key]
-        imageUrls.push(imgUrl)
-      }
+  let imageUrls = []
+  for (let key in sprites) {
+    if (sprites[key]) {
+      const imgUrl = sprites[key]
+      imageUrls.push(imgUrl)
     }
-    setImageUrls(imageUrls)
-  })
+  }
+
   return (
     <div className='FullCard'>
       <h1 className='FullCard-header'>
@@ -37,17 +26,19 @@ export default function FullCard (props) {
             src={activeImage || props.sprites.front_default}
           />
           <div>
-            {imageUrls.map((item, id) => {
-              return (
-                <img
-                  className='FullCard-smallImg'
+            {
+              imageUrls.map((item, id) => {
+                return <img
+                  className={
+                    activeImage === item
+                      ? 'FullCard-smallImg FullCard-activeImage'
+                      : 'FullCard-smallImg'}
                   src={item}
                   key={id}
                   alt={'pokemon'}
-                  onClick={handleClick}
-                />
-              )
-            })}
+                  onClick={setActiveImage.bind(null, item)} />
+              })
+            }
           </div>
         </div>
         <div className='fullCard_info'>
