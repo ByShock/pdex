@@ -1,0 +1,20 @@
+.previewCard_container {
+   box-sizing: border-box;
+   display: flex;
+   width: 250px;
+   flex-direction: column;
+   align-items: center;
+   border: 1px solid #000000;
+   margin: 10px auto;
+   padding: 5px;
+}
+.previewCard_name {
+   text-align: center;
+}
+.previewCard_image {
+   height: 100px;
+   width: 100px;
+}
+.previewCard_button {
+   width: 100%;
+}

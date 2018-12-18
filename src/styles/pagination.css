@@ -1,0 +1,34 @@
+.pagination_container {
+   display: flex;
+   justify-content: center;
+}
+.pagination_items {
+   list-style: none;
+   display: flex;
+   margin: 0 auto;
+}
+.pagination_item {
+   vertical-align: middle;
+   text-align: center;
+   min-width: 20px;
+   padding: 2px 5px;
+   margin: 2px;
+   border: 1px solid #000000;
+}
+.pagination_item:hover {
+   cursor: pointer;
+}
+
+.active {
+   background-color: #ccc;
+}
+.disabled {
+   color: #ccc;
+   border: 1px solid #cccccc;
+}
+.disabled:hover{
+   cursor: not-allowed;
+}
+.disabled > .pagination_link {
+   pointer-events: none;
+}
