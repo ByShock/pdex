@@ -38,17 +38,15 @@ export default class Pokedex extends PureComponent {
       this.links = links
       this.names = names
     }
-    const startPoint = this.state.indexOfPage * this.state.previewCardsPerPage
-    const endPoint = startPoint + this.state.previewCardsPerPage
+    const _previewCardsPerPage = this.state.previewCardsPerPage
+    const _startPoint = this.state.indexOfPage * _previewCardsPerPage
+    const _endPointForPage = _startPoint + _previewCardsPerPage
+    const _endPoint =
+      _endPointForPage > this.count ? this.count : _endPointForPage
     const links = this.links
     const pokemonsData = []
-    for (let i = startPoint, j = 0; i < endPoint; i++, j++) {
-      // я индусь
-      if (links[i]) {
-        pokemonsData[j] = this.getData(links[i])
-      } else {
-        break
-      }
+    for (let i = _startPoint, j = 0; i < _endPoint; i++, j++) {
+      pokemonsData[j] = this.getData(links[i])
     }
     Promise.all(pokemonsData).then(results => {
       this.setState({
@@ -56,7 +54,7 @@ export default class Pokedex extends PureComponent {
       })
     })
   }
-  getData = (url) => {
+  getData = url => {
     const data = axios.get(url).then(res => {
       return res.data
     })
@@ -68,7 +66,6 @@ export default class Pokedex extends PureComponent {
     })
     this.getPokemonsInfo()
   }
-
   nextPage = () => {
     this.setState({
       indexOfPage: this.state.indexOfPage + 1
@@ -76,8 +73,7 @@ export default class Pokedex extends PureComponent {
     this.getPokemonsInfo()
   }
 
-  certainPage = (num) => {
-    // changePage
+  certainPage = num => {
     const index = num - 1
     this.setState({
       indexOfPage: index

@@ -10,12 +10,12 @@ export default class PreviewCard extends Component {
       fullCardIsOpen: false
     }
   }
-  openCard = (e) => {
+  openCard = e => {
     this.setState({
       fullCardIsOpen: true
     })
   }
-  closeCard = (e) => {
+  closeCard = e => {
     this.setState({
       fullCardIsOpen: false
     })

@@ -5,7 +5,7 @@ import '../styles/fullCard.css'
 export default function FullCard (props) {
   let [imageUrls, setImageUrls] = useState([])
   let [activeImage, setActiveImage] = useState(null)
-  const handleClick = (e) => {
+  const handleClick = e => {
     const images = document.getElementsByClassName('FullCard-smallImg')
     for (let i = 0; i < images.length; i++) {
       images[i].setAttribute('class', 'FullCard-smallImg')
