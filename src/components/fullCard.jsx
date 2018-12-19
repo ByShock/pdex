@@ -26,19 +26,21 @@ export default function FullCard (props) {
             src={activeImage || props.sprites.front_default}
           />
           <div>
-            {
-              imageUrls.map((item, id) => {
-                return <img
+            {imageUrls.map((item, id) => {
+              return (
+                <img
                   className={
                     activeImage === item
                       ? 'FullCard-smallImg FullCard-activeImage'
-                      : 'FullCard-smallImg'}
+                      : 'FullCard-smallImg'
+                  }
                   src={item}
                   key={id}
                   alt={'pokemon'}
-                  onClick={setActiveImage.bind(null, item)} />
-              })
-            }
+                  onClick={setActiveImage.bind(null, item)}
+                />
+              )
+            })}
           </div>
         </div>
         <div className='fullCard_info'>

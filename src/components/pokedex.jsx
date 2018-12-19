@@ -13,13 +13,17 @@ export default class Pokedex extends PureComponent {
     this.state = {
       previewCardsPerPage: 150,
       indexOfPage: 0,
-      pokemonsData: undefined
+      pokemonsData: undefined,
+      loading: null
     }
     this.count = undefined
     this.links = []
     this.names = []
   }
   async getPokemonsInfo () {
+    this.setState({
+      loading: true
+    })
     if (!this.state.count) {
       const data = await axios
         .get('https://pokeapi.co/api/v2/pokemon/')
@@ -50,7 +54,8 @@ export default class Pokedex extends PureComponent {
     }
     Promise.all(pokemonsData).then(results => {
       this.setState({
-        pokemonsData: results
+        pokemonsData: results,
+        loading: false
       })
     })
   }
@@ -96,12 +101,16 @@ export default class Pokedex extends PureComponent {
           certainPage={this.certainPage}
           indexOfPage={this.state.indexOfPage}
         />
-        {this.state.pokemonsData && (
-          <div className='Pokedex-cardsContainer'>
-            {this.state.pokemonsData.map((item, id) => {
-              return <PreviewCard {...item} key={id} />
-            })}
-          </div>
+        {this.state.loading ? (
+          <h1>Loading...</h1>
+        ) : (
+          this.state.pokemonsData && (
+            <div className='Pokedex-cardsContainer'>
+              {this.state.pokemonsData.map((item, id) => {
+                return <PreviewCard {...item} key={id} />
+              })}
+            </div>
+          )
         )}
       </div>
     )

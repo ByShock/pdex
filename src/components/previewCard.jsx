@@ -30,11 +30,7 @@ export default function PreviewCard (props) {
           More info...
         </button>
       </div>
-      {
-        fullCardIsOpen ? (
-          <FullCard {...props} closeCard={closeCard} />
-        ) : null
-      }
+      {fullCardIsOpen ? <FullCard {...props} closeCard={closeCard} /> : null}
     </div>
   )
 }

@@ -2,7 +2,6 @@
 import React from 'react'
 
 export default function PaginationButton (props) {
-
   return (
     <li
       data-value={props.value}
