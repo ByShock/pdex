@@ -26,9 +26,9 @@ export default function Pagination (props) {
     <div>
       {props.count && (
         <div className='Pagination'>
-          <ul className='Pagination-items'>
+          <ul className='Pagination-buttons'>
             <li
-              className={`Pagination-item ${
+              className={`Pagination-button ${
                 props.indexOfPage <= 0 ? 'disabled' : ''
               }`}
             >
@@ -38,7 +38,7 @@ export default function Pagination (props) {
             </li>
             {buttons}
             <li
-              className={`Pagination-item ${
+              className={`Pagination-button ${
                 props.count / props.previewCardsPerPage <= props.indexOfPage + 1
                   ? 'disabled'
                   : ''

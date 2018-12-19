@@ -7,7 +7,7 @@ export default function PaginationButton (props) {
       data-value={props.value}
       onClick={props.certainPage}
       className={`
-               Pagination-item
+               Pagination-button
                ${props.numberOfPage === props.value ? ' active' : ''}
             `}
     >
