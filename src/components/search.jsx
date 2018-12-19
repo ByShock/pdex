@@ -21,10 +21,9 @@ export default function SearchForm (props) {
       })
       makeHints(tmpArr)
     } else {
-      console.log('no names')
+      console.error('no names')
     }
   }
-
   const handleSubmit = async e => {
     e.preventDefault()
     const value = e.target.attributes['data-name'].value.toLowerCase() // мракобесие из за асинхронности сетстейта. Fix this please !1
@@ -39,7 +38,6 @@ export default function SearchForm (props) {
 
   const handleClick = e => {
     const name = e.target.attributes['data-name'].value
-    console.log(name)
     changeInputValue(name)
     handleSubmit(e)
   }

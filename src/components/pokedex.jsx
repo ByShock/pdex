@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { PureComponent } from 'react'
+import React, { useState, useEffect } from 'react'
 import PreviewCard from './previewCard'
 import axios from 'axios'
 import Pagination from './pagination'
@@ -7,112 +7,95 @@ import SearchForm from './search'
 
 import '../styles/pokedex.css'
 
-export default class Pokedex extends PureComponent {
-  constructor (props) {
-    super(props)
-    this.state = {
-      previewCardsPerPage: 150,
-      indexOfPage: 0,
-      pokemonsData: undefined,
-      loading: null
-    }
-    this.count = undefined
-    this.links = []
-    this.names = []
+export default function Pokedex (props) {
+  let [previewCardsPerPage, setPreviewCardsPerPage] = useState(150)
+  let [indexOfPage, setIndexOfPage] = useState(null)
+  let [pokemonsData, setPokemonsData] = useState(undefined)
+  let [loading, setLoading] = useState(true)
+  let [count, setCount] = useState(null)
+  let [links, setLinks] = useState([])
+  let [names, setNames] = useState([])
+  const certainPage = num => {
+    const index = num - 1
+    setIndexOfPage(index)
   }
-  async getPokemonsInfo () {
-    this.setState({
-      loading: true
-    })
-    if (!this.state.count) {
-      const data = await axios
-        .get('https://pokeapi.co/api/v2/pokemon/')
-        .then(response => {
-          return response.data.results
-        })
-      const count = data.length
-      this.count = count
-      const links = []
-      const names = []
-      data.map(item => {
-        names.push(item.name)
-        links.push(item.url)
-        return null
-      })
-      this.links = links
-      this.names = names
-    }
-    const _previewCardsPerPage = this.state.previewCardsPerPage
-    const _startPoint = this.state.indexOfPage * _previewCardsPerPage
-    const _endPointForPage = _startPoint + _previewCardsPerPage
-    const _endPoint =
-      _endPointForPage > this.count ? this.count : _endPointForPage
-    const links = this.links
-    const pokemonsData = []
-    for (let i = _startPoint, j = 0; i < _endPoint; i++, j++) {
-      pokemonsData[j] = this.getData(links[i])
-    }
-    Promise.all(pokemonsData).then(results => {
-      this.setState({
-        pokemonsData: results,
-        loading: false
-      })
-    })
-  }
-  getData = url => {
+
+  const getData = url => {
     const data = axios.get(url).then(res => {
       return res.data
     })
     return data
   }
-  prevPage = () => {
-    this.setState({
-      indexOfPage: this.state.indexOfPage - 1
+
+  const getPokemonsInfo = async () => {
+    if (indexOfPage === null) {
+      certainPage(1)
+    }
+    setLoading(true)
+    const data = await axios
+      .get('https://pokeapi.co/api/v2/pokemon/')
+      .then(response => {
+        return response.data.results
+      })
+    const _count = data.length
+    setCount(_count)
+    let _links = []
+    let _names = []
+    data.map(item => {
+      _names.push(item.name)
+      _links.push(item.url)
+      return null
     })
-    this.getPokemonsInfo()
+    setLinks(_links)
+    setNames(_names)
+
+    const _previewCardsPerPage = previewCardsPerPage
+    const _startPoint = indexOfPage * _previewCardsPerPage
+    const _endPointForPage = _startPoint + _previewCardsPerPage
+    const _endPoint = _endPointForPage > _count ? _count : _endPointForPage
+    const _pokemonsData = []
+    console.log(count, 'count')
+    for (let i = _startPoint, j = 0; i < _endPoint; i++, j++) {
+      _pokemonsData[j] = getData(_links[i])
+    }
+    Promise.all(_pokemonsData).then(results => {
+      setPokemonsData(results)
+      setLoading(false)
+    })
   }
-  nextPage = () => {
-    this.setState({
-      indexOfPage: this.state.indexOfPage + 1
-    })
-    this.getPokemonsInfo()
+  useEffect(
+    () => {
+      getPokemonsInfo()
+    },
+    [indexOfPage]
+  )
+  const prevPage = () => {
+    setIndexOfPage(indexOfPage - 1)
+  }
+  const nextPage = () => {
+    setIndexOfPage(indexOfPage + 1)
   }
 
-  certainPage = num => {
-    const index = num - 1
-    this.setState({
-      indexOfPage: index
-    })
-    this.getPokemonsInfo()
-  }
-
-  componentDidMount () {
-    this.getPokemonsInfo()
-  }
-  render () {
-    return (
-      <div className='Pokedex'>
-        <SearchForm names={this.names} />
-        <Pagination
-          prevPage={this.prevPage}
-          nextPage={this.nextPage}
-          count={this.count}
-          previewCardsPerPage={this.state.previewCardsPerPage}
-          certainPage={this.certainPage}
-          indexOfPage={this.state.indexOfPage}
-        />
-        {this.state.loading ? (
-          <h1>Loading...</h1>
-        ) : (
-          this.state.pokemonsData && (
-            <div className='Pokedex-cardsContainer'>
-              {this.state.pokemonsData.map((item, id) => {
-                return <PreviewCard {...item} key={id} />
-              })}
-            </div>
-          )
-        )}
-      </div>
-    )
-  }
+  return (
+    <div className='Pokedex'>
+      <SearchForm names={names} />
+      <Pagination
+        prevPage={prevPage}
+        nextPage={nextPage}
+        count={count}
+        previewCardsPerPage={previewCardsPerPage}
+        certainPage={certainPage}
+        indexOfPage={indexOfPage}
+      />
+      {loading ? (
+        <div className='Pokedex-cardsContainer'>Loading...</div>
+      ) : (
+        <div className='Pokedex-cardsContainer'>
+          {pokemonsData.map((item, id) => {
+            return <PreviewCard {...item} key={id} />
+          })}
+        </div>
+      )}
+    </div>
+  )
 }

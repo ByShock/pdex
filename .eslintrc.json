@@ -1,4 +1,7 @@
 {
+    "plugins": [
+        "react-hooks"
+    ],
     "extends": "standard",
     "parserOptions": {
         "ecmaVersion": 6,
@@ -8,6 +11,7 @@
         }
     },
     "rules": {
-        "semi": 2
+        "semi": 2,
+        "react-hooks/rules-of-hooks": "error"
     }
 }
